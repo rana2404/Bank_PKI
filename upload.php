@@ -51,7 +51,7 @@ $target_filePubKey = $target_fileX509 . "_Pub.pem";
 if  ($uploadOk !== 0) {
 //	$cmd = "openssl dgst -sha3-512 -verify rsa_pub_prof_sign.pem -signature ./uploads/Task1-msg-1-digsig.bin ./uploads/Task1-msg-1.txt ";
 
-//The openssl x509 command extracts the public key from the X509 certificate which is required in the signature verification step
+//The openssl x509 command extracts the public key from the X509 certificate which is required in the signature verification step - cmd result verified okay if correct
 	$cmd = "openssl x509 -inform pem -in $target_fileX509 -pubkey -out $target_filePubKey";
 	$valRes = exec( $cmd );
 	$cmd = "openssl dgst -sha256 -verify $target_filePubKey -signature $target_fileSig $target_file ";
@@ -85,7 +85,7 @@ if  ($uploadOk !== 0) {
 	}
 	
 // crl check
-	$crlFile = 'https://www.bankcsa.csa/CAGroup4.crl';
+	// $crlFile = 'https://www.bankcsa.csa/CAGroup4.crl';
 	$cmd = "x509 -noout -serial -in $carootFile -text";
 	$cmd = "verify -verbose -crl_check -crl_download -trusted $carootFile $target_fileX509";
 	$res = exec( $cmd );
